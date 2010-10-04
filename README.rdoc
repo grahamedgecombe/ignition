@@ -1,0 +1,48 @@
+= Ignition
+
+Static pages for Rails 3.
+
+== Installation
+
+Just execute the following command in the root directory of your Rails app:
+
+ rails plugin install git://github.com/grahamedgecombe/ignition.git
+
+== Usage
+
+Put your pages in <tt>RAILS_ROOT/app/views/pages</tt>:
+
+ mkdir app/views/pages
+ echo "<h2>Hello World</h2>" > app/views/pages/hello.html.erb
+
+Decide where you want static pages to be 'mounted', and add this to
+config/routes.rb:
+
+ static          # would map the page above to /hello
+ static '/pages' # would map the page above to /pages/hello
+
+Link to your pages like so:
+
+ link_to 'Hello', page_path('hello')
+
+Done!
+
+== Tips and pitfalls
+
+If you use the default static route and map pages to <tt>/page_name</tt>, then
+the route must be added to the end of the routes file, to avoid overriding your
+other routes.
+
+You can nest pages too! For example <tt>/articles/i-love-rails</tt> will map to
+the <tt>app/views/pages/articles/i-love-rails.html.erb</tt> file. Don't
+worry - Ignition performs some checks to make sure that people can't include
+<tt>/../../../../etc/passwd</tt>, or any other file outside of the
+<tt>RAILS_ROOT/app/views/pages</tt> directory.
+
+Ignition will also cache your pages (but not the application layout, in case it
+is dynamic).
+
+== License
+
+Copyright (c) 2010 Graham Edgecombe.
+Released under the MIT license, see the <tt>MIT-LICENSE</tt> file for the terms.
