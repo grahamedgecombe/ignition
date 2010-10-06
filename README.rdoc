@@ -16,7 +16,7 @@ Put your pages in <tt>RAILS_ROOT/app/views/pages</tt>:
  echo "<h2>Hello World</h2>" > app/views/pages/hello.html.erb
 
 Decide where you want static pages to be 'mounted', and add this to
-config/routes.rb:
+<tt>config/routes.rb</tt>:
 
  static          # would map the page above to /hello
  static '/pages' # would map the page above to /pages/hello
