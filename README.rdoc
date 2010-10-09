@@ -39,8 +39,11 @@ worry - Ignition performs some checks to make sure that people can't include
 <tt>/../../../../etc/passwd</tt>, or any other file outside of the
 <tt>RAILS_ROOT/app/views/pages</tt> directory.
 
-Ignition will also cache your pages (but not the application layout, in case it
-is dynamic).
+<str>Ignition will also cache your pages (but not the application layout, in
+case it is dynamic).</str>
+
+Caching pages is currently disabled due to causing problems in some of my own
+real apps. Add it back if you want.
 
 == License
 
