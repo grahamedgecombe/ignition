@@ -8,8 +8,8 @@ module Ignition
     # forwards requests to Ignition's static pages controller. If no prefix is
     # specified the default is '/'.
     def static(prefix = '/')
-      prefix = prefix.gsub /\/$/, '' unless prefix.length == 1 
-      match "#{prefix}/*id", :to => 'ignition/pages#show', :as => 'page'
+      prefix = prefix.gsub /\/$/, ''
+      get "#{prefix}/*id", :to => 'ignition/pages#show', :as => 'page'
     end
   end
 end
