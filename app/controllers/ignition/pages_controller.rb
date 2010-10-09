@@ -1,8 +1,6 @@
 # A Rails controller which maps static content to actual template files in the
 # <tt>RAILS_ROOT/app/views/pages</tt> directory.
 class Ignition::PagesController < ApplicationController
-  caches_action :show, :layout => false
-
   # Attempts to show the page specified by the <tt>params[:id]</tt> parameter.
   def show
     id = params[:id]
