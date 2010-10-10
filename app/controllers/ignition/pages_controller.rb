@@ -1,3 +1,5 @@
+require 'ignition'
+
 # A Rails controller which maps static content to actual template files in the
 # <tt>RAILS_ROOT/app/views/pages</tt> directory.
 class Ignition::PagesController < ApplicationController
@@ -11,6 +13,23 @@ class Ignition::PagesController < ApplicationController
   # The subdirectory of the app/views directory where static pages are loaded
   # from. This is set to <tt>'pages'</tt>.
   PAGES_DIRECTORY = 'pages'.freeze
+
+  # Creates the controller, setting the cache method chosen using the
+  # <tt>Ignition::Configuration</tt> class.
+  def initialize
+    super
+
+    caching_method = Ignition::Configuration.caching_method
+    if caching_method == :page
+      caches_page :show
+    elsif caching_method == :page_without_layout
+      caches_action :show, :layout => false
+    elsif caching_method == :none
+      # do nothing
+    else
+      raise "Invalid caching method: #{caching_method}"
+    end
+  end
 
   # Attempts to show the page specified by the <tt>params[:id]</tt> parameter.
   def show

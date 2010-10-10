@@ -27,6 +27,19 @@ Link to your pages like so:
 
 Done!
 
+== Configuration
+
+You can enable caching by placing this in your <tt>config/application.rb</tt>
+file:
+
+  Ignition::Configuration.caching_method = :page
+
+<tt>:page</tt> uses the Rails page caching. <tt>:page_without_layout</tt> uses
+action caching without the caching your application's layout. You can also set
+it to <tt>:none</tt> for no caching to be performed (this is the default).
+
+This setting cannot be changed at runtime.
+
 == Tips
 
 If Ignition cannot find a page, it will set the <tt>X-Cascade</tt> header to
