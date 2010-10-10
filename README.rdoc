@@ -29,15 +29,20 @@ Done!
 
 == Tips and pitfalls
 
-If you use the default static route and map pages to <tt>/page_name</tt>, then
-the route must be added to the end of the routes file, to avoid overriding your
-other routes.
+In older versions of Ignition, if you used the default static route and mapped
+pages to <tt>/page_name</tt>, then the route had to bee added to the end of the
+routes file, to avoid overriding your other routes. This is no longer the case:
+Ignition uses the <tt>X-Cascade</tt> header when the page does not exist to
+tell Rails' router that it should continue trying other routes.
 
 You can nest pages too! For example <tt>/articles/i-love-rails</tt> will map to
 the <tt>app/views/pages/articles/i-love-rails.html.erb</tt> file. Don't
 worry - Ignition performs some checks to make sure that people can't include
 <tt>/../../../../etc/passwd</tt>, or any other file outside of the
 <tt>RAILS_ROOT/app/views/pages</tt> directory.
+
+Ignition still works if you change where the <tt>views</tt> directory is (or if
+your application has multiple <tt>views</tt> directories).
 
 == License
 
