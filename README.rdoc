@@ -27,13 +27,12 @@ Link to your pages like so:
 
 Done!
 
-== Tips and pitfalls
+== Tips
 
-In older versions of Ignition, if you used the default static route and mapped
-pages to <tt>/page_name</tt>, then the route had to bee added to the end of the
-routes file, to avoid overriding your other routes. This is no longer the case:
-Ignition uses the <tt>X-Cascade</tt> header when the page does not exist to
-tell the Rails router that it should continue trying other routes.
+If Ignition cannot find a page, it will set the <tt>X-Cascade</tt> header to
+<tt>pass</tt> and set the respons status to 404. This will cause the Rails
+router to try the next rule(s). This cascade behaviour means that mapping
+static pages to the root of your site won't stop you accessing everything else.
 
 You can nest pages too! For example <tt>/articles/i-love-rails</tt> will map to
 the <tt>app/views/pages/articles/i-love-rails.html.erb</tt> file. Don't
