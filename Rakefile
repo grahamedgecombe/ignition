@@ -1,8 +1,17 @@
 require 'rake'
+require 'rake/testtask'
 require 'rake/rdoctask'
 
-desc 'Default: generate documentation.'
-task :default => :rdoc
+desc 'Default: run unit tests.'
+task :default => :test
+
+desc 'Test the ignition plugin.'
+Rake::TestTask.new(:test) do |t|
+  t.libs << 'lib'
+  t.libs << 'test'
+  t.pattern = 'test/*_test.rb'
+  t.verbose = true
+end
 
 desc 'Generate documentation for the ignition plugin.'
 Rake::RDocTask.new(:rdoc) do |rdoc|
