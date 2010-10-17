@@ -14,8 +14,7 @@ class Ignition::PagesController < ApplicationController
   # from. This is set to <tt>'pages'</tt>.
   PAGES_DIRECTORY = 'pages'.freeze
 
-  # Creates the controller, setting the cache method chosen using the
-  # <tt>Ignition::Configuration</tt> class.
+  # Creates the controller.
   def initialize
     super
 

@@ -29,16 +29,24 @@ Done!
 
 == Configuration
 
-You can enable caching by placing this in your <tt>config/application.rb</tt>
-file:
+Ignition can be configured by placing a call to Ignition::configure in the an
+initializer (e.g. <tt>config/initializers/ignition.rb</tt>) or an environment
+(if you wanted different behaviour with developing, testing and production,
+e.g. <tt>config/environments/production.rb</tt>) configuration file.
 
-  Ignition::Configuration.caching_method = :page
+ Ignition.configure do |config|
+   # configuration entries here
+ end
+
+The following settings are currently supported:
+
+=== config.caching_method
+
+You can configure caching using the <tt>caching_method</tt> setting.
 
 <tt>:page</tt> uses the Rails page caching. <tt>:page_without_layout</tt> uses
 action caching without the caching your application's layout. You can also set
 it to <tt>:none</tt> for no caching to be performed (this is the default).
-
-This setting cannot be changed at runtime.
 
 == Tips
 
