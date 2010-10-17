@@ -4,7 +4,7 @@ Dummy::Application.routes.draw do
 
   static '/extra-pages', :as => 'extra_pages'
   static
-  get 'time', :to  => 'dynamic#time'
+  get 'time', :to  => 'time#now'
 
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'

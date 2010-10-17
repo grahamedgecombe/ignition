@@ -39,7 +39,7 @@ module Ignition
       get 'time'
 
       assert_response :success
-      assert_template 'dynamic/time'
+      assert_template 'time/now'
     end
   end
 end
