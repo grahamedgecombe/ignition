@@ -29,13 +29,13 @@ module Ignition
       assert_response :missing
     end
 
-    test 'should not allow access to file below pages directory' do
+    test 'should restrict directory access' do
       get '../layouts/application'
 
       assert_response :missing
     end
 
-    test 'should cascade to next routes' do
+    test 'route should cascade' do
       get 'time'
 
       assert_response :success
