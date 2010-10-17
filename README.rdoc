@@ -29,10 +29,9 @@ Done!
 
 == Configuration
 
-Ignition can be configured by placing a call to Ignition::configure in the an
+Ignition can be configured by placing a call to Ignition::configure in an
 initializer (e.g. <tt>config/initializers/ignition.rb</tt>) or an environment
-(if you wanted different behaviour with developing, testing and production,
-e.g. <tt>config/environments/production.rb</tt>) configuration file.
+configuration file (e.g. <tt>config/environments/production.rb</tt>).
 
  Ignition.configure do |config|
    # configuration entries here
