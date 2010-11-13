@@ -1,5 +1,7 @@
 = Ignition
 
+link:https://github.com/grahamedgecombe/ignition/raw/master/doc/logo.png
+
 Static pages for Rails 3.
 
 == Installation
