@@ -65,5 +65,7 @@ your application has multiple <tt>views</tt> directories).
 
 == License
 
+The logo was designed by Jonathan Edgecombe.
+
 Copyright (c) 2010 Graham Edgecombe.
 Released under the MIT license, see the <tt>MIT-LICENSE</tt> file for the terms.
