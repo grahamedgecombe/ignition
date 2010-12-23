@@ -51,10 +51,10 @@ to `:none` for no caching to be performed (this is the default).
 
 ## Tips
 
-If Ignition cannot find a page, it will set the `X-Cascade` header to
-`pass` and set the response status to 404. This will cause the Rails
-router to try the next rule(s). This cascade behaviour means that mapping
-static pages to the root of your site won't stop you accessing everything else.
+Ignition uses a constraint in the route to check if the page exists. This means
+mapping static pages to the root of your site won't stop you from accessing
+everything else (unless a static page conflicts with one of your normal
+routes).
 
 You can nest pages too! For example `/articles/i-love-rails` will map to
 the `app/views/pages/articles/i-love-rails.html.erb` file. Don't
