@@ -18,7 +18,7 @@ module Ignition
   # set configuration directly using this object, this functionality should be
   # considered deprecated and it is preferrable to use Ignition::configure to
   # configure Ignition.
-  class Configuration < BasicObject
+  class Configuration < ActiveSupport::BasicObject
     class << self
       # The type of caching used. The default is <tt>:none</tt>. Other valid
       # options are <tt>:page</tt> and <tt>:page_without_layout</tt>.

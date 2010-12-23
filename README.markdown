@@ -46,8 +46,8 @@ The following settings are currently supported:
 You can configure caching using the `caching_method` setting.
 
 `:page` uses the Rails page caching. `:page_without_layout` uses
-action caching without the caching your application's layout. You can also set
-it to `:none` for no caching to be performed (this is the default).
+action caching without caching your application's layout. You can also set it
+to `:none` for no caching to be performed (this is the default).
 
 ## Tips
 
