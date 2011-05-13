@@ -20,7 +20,7 @@ module Ignition
         # directory.
         def exists_and_valid?(id)
           found = false
-          Rails.application.paths.app.views.each do |path|
+          Rails.application.config.paths['app/views'].each do |path|
             base = File.expand_path(Ignition::PAGES_DIRECTORY, path)
             file = File.expand_path(id, base)
             if not file.starts_with? base
