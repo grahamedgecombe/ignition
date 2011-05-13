@@ -24,15 +24,15 @@ module Ignition
     end
 
     test 'should give 404 error' do
-      get 'non-existant'
-
-      assert_response :missing
+      assert_raises ActionController::RoutingError do
+        get 'non-existant'
+      end
     end
 
     test 'should restrict directory access' do
-      get '../layouts/application'
-
-      assert_response :missing
+      assert_raises ActionController::RoutingError do
+        get '../layouts/application'
+      end
     end
 
     test 'route should cascade' do
