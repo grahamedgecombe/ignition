@@ -24,14 +24,14 @@ Features
 
   * Caching
 
-  * Secure - you cannot include pages outside of the `app/views/pages` directory
+  * Secure - users cannot fetch pages outside of the `app/views/pages` directory
 
   * Nested pages - e.g. `http://my.app/pages/projects/hello` would load the
     template `app/views/projects/hello.html.erb`
 
   * Mountable at any path - e.g. you could mount to `/` if you wanted pages
     like `/about`, this will not conflict with your existing routes even if
-    Ignition is mounted before your define the routes
+    Ignition is mounted before you define the routes
 
   * URL helpers - use `ignition_engine.page_path` and
     `ignition_engine.page_url` to link to your static pages.
