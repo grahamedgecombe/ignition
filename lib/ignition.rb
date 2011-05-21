@@ -1,6 +1,5 @@
-require 'ignition/routing'
-require 'ignition/config'
+require 'ignition/engine'
 
-# Static pages for Rails 3.
 module Ignition
 end
+

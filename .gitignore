@@ -1,4 +1,6 @@
 .*
 *~
-rdoc
-!.gitignore
+*.gem
+!.git*
+!.mailmap
+

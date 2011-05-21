@@ -1,41 +1,34 @@
 require 'test_helper'
 
 module Ignition
-  class StaticPagesTest < ActionController::IntegrationTest
-    test 'additional routes' do
-      get 'extra-pages/hello'
-
-      assert_response :success
-      assert_template 'pages/hello'
-    end
-
-    test 'should get top-level page' do
+  class RoutingTest < ActionController::IntegrationTest
+    test 'top-level page' do
       get 'hello'
 
       assert_response :success
       assert_template 'pages/hello'
     end
 
-    test 'should get nested page' do
+    test 'nested page' do
       get 'nested/page'
 
       assert_response :success
       assert_template 'pages/nested/page'
     end
 
-    test 'should give 404 error' do
+    test '404 errors' do
       assert_raises ActionController::RoutingError do
         get 'non-existant'
       end
     end
 
-    test 'should restrict directory access' do
+    test 'directory access restricted' do
       assert_raises ActionController::RoutingError do
         get '../layouts/application'
       end
     end
 
-    test 'route should cascade' do
+    test 'route cascades' do
       get 'time'
 
       assert_response :success
@@ -43,3 +36,4 @@ module Ignition
     end
   end
 end
+

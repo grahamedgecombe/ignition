@@ -1,73 +1,107 @@
-# Ignition
+Ignition
+========
 
-![Ignition logo](https://github.com/grahamedgecombe/ignition/raw/master/doc/logo.png)
+Ignition is a [Rails][1] [engine][2] which routes and renders your
+application's static pages.
 
-Static pages for Rails 3.
+Installation
+------------
 
-## Installation
+It takes three easy steps to install Ignition:
 
-Just execute the following command in the root directory of your Rails app:
+  1. Add `gem 'ignition'` to your `Gemfile` and run the `bundle` command.
 
-    rails plugin install git://github.com/grahamedgecombe/ignition.git
+  2. Mount Ignition's engine in your `config/routes.rb` file:
 
-## Usage
+         mount Ignition::Engine => '/pages'
 
-Put your pages in `RAILS_ROOT/app/views/pages`:
+  3. Create pages like normal templates in the `app/views/pages` directory. Use
+     any format and template handler you like. They'll be available at
+     `/pages/name`.
 
-    mkdir app/views/pages
-    echo "<h2>Hello World</h2>" > app/views/pages/hello.html.erb
+Features
+--------
 
-Decide where you want static pages to be 'mounted', and add this to
-`config/routes.rb`:
+  * Caching
 
-    static          # would map the page above to /hello
-    static '/pages' # would map the page above to /pages/hello
+  * Secure - you cannot include pages outside of the `app/views/pages` directory
 
-Link to your pages like so:
+  * Nested pages - e.g. `http://my.app/pages/projects/hello` would load the
+    template `app/views/projects/hello.html.erb`
 
-    link_to 'Hello', page_path('hello')
+  * Mountable at any path - e.g. you could mount to `/` if you wanted pages
+    like `/about`, this will not conflict with your existing routes even if
+    Ignition is mounted before your define the routes
 
-Done!
+  * URL helpers - use `ignition_engine.page_path` and
+    `ignition_engine.page_url` to link to your static pages.
 
-## Configuration
+  * Works with custom (and multiple) `app/views` paths.
 
-Ignition can be configured by placing a call to Ignition::configure in an
-initializer (e.g. `config/initializers/ignition.rb`) or an environment
-configuration file (e.g. `config/environments/production.rb`).
+Configuration
+-------------
 
-    Ignition.configure do |config|
-      # configuration entries here
+### Caching
+
+By default Ignition does not perform any caching, as this can interfere with
+the application's layout.
+
+There are three types of caching:
+
+  * **`:none`** - does not perform any caching (default).
+
+  * **`:page`** - caches the entire page using Rails' [page caching][3].
+
+  * **`:page_without_layout`** - caches the page using Rails'
+    [action caching][4]. The layout is not included in the cache, therefore
+    this option is useful if your layout is dynamic.
+
+These can be set in the `config/application.rb` file or any of the
+`config/environments/*.rb` files, like so:
+
+    config.ignition.cache = :page
+
+### Layout
+
+By default Ignition will make your static pages use the `application` layout.
+This is also the Rails default. It can be changed like so in the
+`config/application.rb` file:
+
+    config.ignition.layout = 'my_page_layout'
+
+### View Prefix
+
+By default Ignition will try to include pages in a folder named `pages` inside
+your `app/views` folder. You can change this `pages` prefix by changing the
+following stting inside the `config/application.rb` file:
+
+    config.ignition.view_prefix = 'static_pages'
+
+The only reason you would probably want to do this is if `pages` conflicts with
+a controller and set of views you already have.
+
+Tips
+----
+
+### Avoid typing `ignition_engine.` in front of URL helpers
+
+This can be accomplished by placing the following code in your
+`ApplicationHelper` module, found in the `app/helpers/application_helper.rb`
+file:
+
+    [:page_path, :page_url].each do |method|
+      define_method(method) do |*args|
+        ignition_engine.send(method, *args)
+      end
     end
 
-The following settings are currently supported:
+License
+-------
 
-### config.caching_method
+Ignition is available under the MIT license, see the `LICENSE` file.
 
-You can configure caching using the `caching_method` setting.
+[1]: http://www.rubyonrails.org
+[2]: http://api.rubyonrails.org/classes/Rails/Engine.html
+[3]: http://guides.rubyonrails.org/caching_with_rails.html#page-caching
+[4]: http://guides.rubyonrails.org/caching_with_rails.html#action-caching
 
-`:page` uses the Rails page caching. `:page_without_layout` uses
-action caching without caching your application's layout. You can also set it
-to `:none` for no caching to be performed (this is the default).
-
-## Tips
-
-Ignition uses a constraint in the route to check if the page exists. This means
-mapping static pages to the root of your site won't stop you from accessing
-everything else (unless a static page conflicts with one of your normal
-routes).
-
-You can nest pages too! For example `/articles/i-love-rails` will map to
-the `app/views/pages/articles/i-love-rails.html.erb` file. Don't
-worry - Ignition performs some checks to make sure that people can't include
-`/../../../../etc/passwd`, or any other file outside of the
-`RAILS_ROOT/app/views/pages` directory.
-
-Ignition still works if you change where the `views` directory is (or if
-your application has multiple `views` directories).
-
-## License
-
-The logo was designed by Jonathan Edgecombe.
-
-Copyright (c) 2010 Graham Edgecombe.
-Released under the MIT license, see the `MIT-LICENSE` file for the terms.

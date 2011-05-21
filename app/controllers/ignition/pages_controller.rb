@@ -1,24 +1,22 @@
-require 'ignition'
-
 module Ignition
-  # A Rails controller which maps static content to actual template files in the
-  # <tt>RAILS_ROOT/app/views/pages</tt> directory.
   class PagesController < ApplicationController
-    case Ignition::Configuration.caching_method
+    layout Rails.application.config.ignition.layout
+
+    case Rails.application.config.ignition.cache
     when :page then
       caches_page :show
     when :page_without_layout then
       caches_action :show, :layout => false
     when :none then
       # do nothing
-    else 
-      raise "Invalid caching method: #{Ignition::Configuration.caching_method}"
+    else
+      raise "Invalid caching method: #{Rails.application.config.ignition.cache}"
     end
 
-    # Shows the page specified by the <tt>params[:id]</tt> parameter.
     def show
       id = params[:id]
-      render :template => "#{Ignition::PAGES_DIRECTORY}/#{id}"
+      render :template => "#{Rails.application.config.ignition.view_prefix}/#{id}"
     end
   end
 end
+
