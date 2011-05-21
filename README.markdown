@@ -73,7 +73,7 @@ This is also the Rails default. It can be changed like so in the
 
 By default Ignition will try to include pages in a folder named `pages` inside
 your `app/views` folder. You can change this `pages` prefix by changing the
-following stting inside the `config/application.rb` file:
+following setting inside the `config/application.rb` file:
 
     config.ignition.view_prefix = 'static_pages'
 
