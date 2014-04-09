@@ -1,7 +1,7 @@
 require 'test_helper'
 
 module Ignition
-  class RoutingTest < ActionController::IntegrationTest
+  class RoutingTest < ActionDispatch::IntegrationTest
     test 'top-level page' do
       get 'hello'
 
@@ -36,4 +36,3 @@ module Ignition
     end
   end
 end
-
