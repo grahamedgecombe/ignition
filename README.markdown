@@ -44,17 +44,22 @@ Configuration
 ### Caching
 
 By default Ignition does not perform any caching, as this can interfere with
-the application's layout.
+the application's layout if it is dynamic.
 
 There are three types of caching:
 
   * **`:none`** - does not perform any caching (default).
 
-  * **`:page`** - caches the entire page using Rails' [page caching][3].
+  * **`:page`** - caches the entire page using Rails' [page caching][3]. As page
+    caching was removed form Rails 4, you'll need to install the
+    `actionpack-page_caching` gem for this option to work.
 
   * **`:page_without_layout`** - caches the page using Rails'
     [action caching][4]. The layout is not included in the cache, therefore
-    this option is useful if your layout is dynamic.
+    this option is suitable if your layout is dynamic. However, it's probably
+    also not very useful, unless you do some long-running computation in your
+    static page templates. As action caching was removed from Rails 4, you'll
+    need to install the `actionpack-action_caching` gem for this option to work.
 
 These can be set in the `config/application.rb` file or any of the
 `config/environments/*.rb` files, like so:
@@ -104,4 +109,3 @@ Ignition is available under the MIT license, see the `LICENSE` file.
 [2]: http://api.rubyonrails.org/classes/Rails/Engine.html
 [3]: http://guides.rubyonrails.org/caching_with_rails.html#page-caching
 [4]: http://guides.rubyonrails.org/caching_with_rails.html#action-caching
-
