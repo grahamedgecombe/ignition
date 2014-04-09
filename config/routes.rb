@@ -5,4 +5,3 @@ Ignition::Engine.routes.draw do
     get '*id', :to => 'ignition/pages#show', :as => 'page'
   end
 end
-
