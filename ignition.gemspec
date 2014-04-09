@@ -15,6 +15,5 @@ spec = Gem::Specification.new do |s|
   s.test_files = Dir['test/**/*.rb', 'test/dummy/config.ru']
 
   s.required_ruby_version = '>= 1.9.2'
-  s.add_dependency 'rails', '>= 3.0.0'
+  s.add_runtime_dependency 'rails', '~> 4.0'
 end
-
