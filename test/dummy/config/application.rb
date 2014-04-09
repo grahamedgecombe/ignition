@@ -10,7 +10,11 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 module Dummy
   class Application < Rails::Application
     config.encoding = "utf-8"
-    config.filter_parameters += [:password]
+
+    # Don't eagerly load classes at startup
+    config.eager_load = false
+
+    # Raise exceptions instead of rendering exception templates
+    config.action_dispatch.show_exceptions = false
   end
 end
-
