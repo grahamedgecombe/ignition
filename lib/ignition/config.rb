@@ -9,4 +9,3 @@ module Ignition
     end
   end
 end
-

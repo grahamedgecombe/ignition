@@ -10,21 +10,17 @@ end
 # this hack allows URLs to be generated correctly if the engine is mounted at /
 class ActionDispatch::Routing::Mapper
   private
-    def define_generate_prefix(app, name)
-      return unless app.respond_to?(:routes) && app.routes.respond_to?(:define_mounted_helper)
+    alias_method :old_define_generate_prefix, :define_generate_prefix
 
-      _route = @set.named_routes.routes[name.to_sym]
-      _routes = @set
-      app.routes.define_mounted_helper(name)
-      app.routes.class_eval do
-        define_method :_generate_prefix do |options|
-          prefix_options = options.slice(*_route.segment_keys)
-          # we must actually delete prefix segment keys to avoid passing them to next url_for
-          _route.segment_keys.each { |k| options.delete(k) }
-          prefix = _routes.url_helpers.send("#{name}_path", prefix_options)
+    def define_generate_prefix(app, name)
+      ret = old_define_generate_prefix(app, name)
+      app.routes.singleton_class.class_eval do
+        alias_method :_old_generate_prefix, :_generate_prefix
+
+        redefine_method :_generate_prefix do |options|
+          prefix = _old_generate_prefix(options)
           return prefix == '/' ? '' : prefix
         end
       end
     end
 end
-
