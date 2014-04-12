@@ -2,7 +2,7 @@ spec = Gem::Specification.new do |s|
   s.name = 'ignition'
   s.summary = 'Static pages for Rails 4.'
   s.description = 'An engine for Rails 4 applications which allows easy management and caching of static pages.'
-  s.version = '2.1.0'
+  s.version = '2.1.1'
   s.license = 'MIT'
 
   s.author = 'Graham Edgecombe'
