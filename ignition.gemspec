@@ -12,7 +12,7 @@ spec = Gem::Specification.new do |s|
   s.platform = Gem::Platform::RUBY
 
   s.files = Dir['{app,config,lib}/**/*.rb']
-  s.test_files = Dir['test/**/*.rb', 'test/dummy/config.ru']
+  s.test_files = Dir['test/**/*.{rb,erb}', 'test/dummy/config.ru']
 
   s.required_ruby_version = '>= 1.9.2'
   s.add_runtime_dependency 'rails', '~> 4.0'
